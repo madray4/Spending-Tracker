@@ -1,4 +1,5 @@
 const express = require('express');
+const Entry = require('../models/entryModel');
 
 const router = express.Router();
 
@@ -13,8 +14,16 @@ router.get('/:id', (req, res) => {
 });
 
 // CREATE an entry
-router.post('/', (req, res) => {
-  res.status(200).json({mssg: 'CREATE an entry'});
+router.post('/', async (req, res) => {
+  const { store, item, totalCost, subTotal, shipping, tax, month, day, year, isNecessary } = req.body;
+
+  try{
+    const entry = await Entry.create({ store, item, totalCost, subTotal, shipping, tax, month, day, year, isNecessary});
+    res.status(200).json(entry);
+  }
+  catch (error){
+    res.status(500).json({ error: error.message })
+  };
 });
 
 // DELETE an entry
