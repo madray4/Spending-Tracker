@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const express = require('express');
+const entryRoutes = require('./routes/entryRoutes');
 
 const app = express();
 
@@ -12,9 +13,7 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.get('/', (req, res) => {
-  res.status(200).json({mssg: 'Welcome to the server'});
-});
+app.use('/api/entries', entryRoutes);
 
 // listen for requests
 app.listen(process.env.PORT, () => {
