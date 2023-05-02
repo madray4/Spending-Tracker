@@ -1,5 +1,3 @@
-import React from 'react';
-
 const EntryDetails = ({ entry }) => {
 
   return (
@@ -7,8 +5,6 @@ const EntryDetails = ({ entry }) => {
       <p>{entry.store}</p>
       <p>{entry.item}</p>
       <p>${entry.totalCost}</p>
-      <p>{entry.isNecessary}</p>
-      <p></p>
     </div>
   );
 };
