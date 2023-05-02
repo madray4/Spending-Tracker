@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+//components
+import Navbar from './components/Navbar'
+
+// pages
+import Home from './pages/Home'
 
 const App = () => {
-  const [counter, setCounter] = useState(0);
 
-  const increment = () => {
-    setCounter(counter + 1);
-  };
   return (
     <div className="App">
-      This was made from the ground up! Also hello world!
-      <button onClick={increment}>Increment</button>
-      {counter}
+      <BrowserRouter>
+        <Navbar />
+        <div className="pages">
+          <Routes>
+            <Route
+              path="/"
+              element={<Home/>}
+            />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 };
