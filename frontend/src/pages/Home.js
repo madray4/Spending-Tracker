@@ -17,7 +17,9 @@ const Home = () => {
 
       if(response.ok){
         setEntries(json);
+        console.log(json);
         getUniqueDates(json);
+        console.log(uniqueDates);
       }
     }
     fetchEntries();
@@ -26,7 +28,9 @@ const Home = () => {
   const getUniqueDates = (entries) => {
     const newUniqueDatesSet = new Set();
     entries.forEach(entry => {
+      console.log(entry.date)
       let newDate = new Date(entry.date);
+      newDate.setDate(newDate.getDate()+1);
       newUniqueDatesSet.add(newDate.toString())
     });
 
@@ -35,13 +39,13 @@ const Home = () => {
       newUniqueDates.push(date);
     })
     newUniqueDates.sort((date1, date2) => new Date(date2)-new Date(date1));
-    console.log(newUniqueDates)
     setUniqueDates(newUniqueDates);
   }
 
   const filterEntries = (date) => {
     const filteredEntries = entries.filter((entry) => {
       const entryDate = new Date(entry.date);
+      entryDate.setDate(entryDate.getDate()+1);
       return entryDate.toString() === date;
     })
     return filteredEntries;
@@ -51,7 +55,7 @@ const Home = () => {
     <div className="home">
       <div className="entries">
         {uniqueDates && uniqueDates.map((date) => {
-          return <EntryDate key={date} date={new Date(date)} entries={filterEntries(date)}/>
+          return <EntryDate key={date} date={date} entries={filterEntries(date)}/>
         })}
       </div>
     </div>

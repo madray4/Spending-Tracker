@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom"
 
 import './css/CreateEntry.css'
 
@@ -7,6 +8,7 @@ const CreateEntry = () => {
   const [store, setStore ] = useState('');
   const [item, setItem ] = useState('');
   const [cost, setCost ] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +28,7 @@ const CreateEntry = () => {
     const json = await response.json();
 
     if(response.ok){
-      window.location.href ='/';
+      navigate('/');
     }
   }
 
@@ -50,7 +52,6 @@ const CreateEntry = () => {
               onChange={(e) => setCost(e.target.value)}
               value={cost}/>
       <button>Submit</button>
-      {/* {console.log(new Date("2018-07-22"))} */}
     </form>
   )
 };

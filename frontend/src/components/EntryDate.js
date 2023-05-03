@@ -2,6 +2,8 @@ import './css/EntryDate.css'
 import EntryDetails from './EntryDetails';
 
 const EntryDate = ({ date, entries }) => {
+  date = new Date(date);
+  date.setDate(date.getDate()+1);
 
   return (
     <div className="entry-date">
