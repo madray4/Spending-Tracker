@@ -3,8 +3,6 @@ import EntryDetails from './EntryDetails';
 
 const EntryDate = ({ date, entries }) => {
 
-  console.log(date);
-  console.log(entries);
   return (
     <div className="entry-date">
       <h4>{date.toLocaleString('en-US', {year: "numeric",month: "long",day: "numeric" })}</h4>

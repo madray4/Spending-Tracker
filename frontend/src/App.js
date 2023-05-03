@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 
 // pages
 import Home from './pages/Home'
+import CreateEntry from './pages/CreateEntry'
 
 const App = () => {
 
@@ -18,6 +19,10 @@ const App = () => {
             <Route
               path="/"
               element={<Home/>}
+            />
+            <Route
+              path="/addentry"
+              element={<CreateEntry/>}
             />
           </Routes>
         </div>

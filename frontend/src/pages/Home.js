@@ -4,7 +4,6 @@ import './css/Home.css'
 
 // components
 import EntryDate from '../components/EntryDate'
-import EntryDetails from '../components/EntryDetails'
 
 const Home = () => {
   const [entries, setEntries] = useState(null);
@@ -16,36 +15,35 @@ const Home = () => {
       const response = await fetch('http://localhost:4000/api/entries');
       const json = await response.json();
 
-      
       if(response.ok){
-        const newUniqueDates = uniqueDates;
         setEntries(json);
-        json.forEach(element => {
-          let dateExists = false;
-          let newDate = new Date([element.year, element.month, element.day]);
-          newUniqueDates.forEach(date => {
-            if(newDate.toString() === date.toString()){
-              dateExists = true;
-            }
-          })
-          if(!dateExists){
-            newUniqueDates.push(newDate);
-          }
-        });
-        newUniqueDates.sort((date1, date2) => date2-date1);
-        setUniqueDates(newUniqueDates);
+        getUniqueDates(json);
       }
     }
-
     fetchEntries();
   }, [])
   
+  const getUniqueDates = (entries) => {
+    const newUniqueDatesSet = new Set();
+    entries.forEach(entry => {
+      let newDate = new Date(entry.date);
+      newUniqueDatesSet.add(newDate.toString())
+    });
+
+    let newUniqueDates = uniqueDates;
+    newUniqueDatesSet.forEach(date => {
+      newUniqueDates.push(date);
+    })
+    newUniqueDates.sort((date1, date2) => new Date(date2)-new Date(date1));
+    console.log(newUniqueDates)
+    setUniqueDates(newUniqueDates);
+  }
+
   const filterEntries = (date) => {
     const filteredEntries = entries.filter((entry) => {
-      const entryDate = new Date([entry.year, entry.month, entry.day]);
-      return entryDate.toString() === date.toString();
+      const entryDate = new Date(entry.date);
+      return entryDate.toString() === date;
     })
-
     return filteredEntries;
   }
 
@@ -53,7 +51,7 @@ const Home = () => {
     <div className="home">
       <div className="entries">
         {uniqueDates && uniqueDates.map((date) => {
-          return <EntryDate key={date} date={date} entries={filterEntries(date)}/>
+          return <EntryDate key={date} date={new Date(date)} entries={filterEntries(date)}/>
         })}
       </div>
     </div>

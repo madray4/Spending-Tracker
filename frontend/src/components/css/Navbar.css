@@ -15,3 +15,13 @@ header a {
   color: #333;
   text-decoration: none;
 }
+
+.navbar-buttons{
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.navbar-buttons a:hover{
+  color: gray;
+}

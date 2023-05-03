@@ -9,6 +9,11 @@ const NavBar = () => {
         <Link to="/">
           <h1>Spending Tracker</h1>
         </Link>
+        <div className="navbar-buttons">
+          <Link to="/addentry">
+            <h2>Create</h2>
+          </Link>
+        </div>
       </div>
     </header>
   )

@@ -15,32 +15,10 @@ const entrySchema = new Schema({
     type: Number,
     required: true
   },
-  subTotal: {
-    type: Number
-  },
-  shipping: {
-    type: Number
-  },
-  tax: {
-    type: Number
-  },
-  month: {
-    type: Number,
-    required: true
-  },
-  day: {
-    type: Number,
-    required: true
-  },
-  year: {
-    type: Number,
-    required: true
-  },
-  isNecessary: {
+  date: {
     type: String,
     required: true
   }
-
 });
 
 module.exports = mongoose.model('Entry', entrySchema)
