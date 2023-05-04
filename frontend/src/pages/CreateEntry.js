@@ -21,7 +21,7 @@ const CreateEntry = () => {
         'Content-Type': 'application/json'
       }
     })
-    const json = await response.json();
+    // const json = await response.json();
 
     if(response.ok){
       navigate('/');

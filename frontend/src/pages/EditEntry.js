@@ -13,8 +13,30 @@ const EditEntry = () => {
   const [item, setItem ] = useState(entry.item);
   const [cost, setCost ] = useState(entry.totalCost);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const editedEntry = {date, store, item, totalCost: cost};
+    const url = '/api/entries/' + entry._id;
+    const response = await fetch(url, {
+      method: 'PATCH',
+      body: JSON.stringify(editedEntry),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const json = await response.json();
+
+    if(response.ok){
+      console.log("Before navigate")
+      navigate('/');
+    }
+    else{
+      console.log(response.error);
+    }
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h3>Edit an Entry</h3>
       <label>Date:</label>
       <input type="date" 

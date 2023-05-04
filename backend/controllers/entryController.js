@@ -51,11 +51,11 @@ const deleteEntry = async (req, res) => {
 // UPDATE an entry
 const updateEntry = async (req, res) => {
   const { id } = req.params;
+  console.log(id);
 
   if(!mongoose.Types.ObjectId.isValid(id)){
     return res.status(500).json({error: 'No such entry'});
   }
-
   const entry = await Entry.findByIdAndUpdate(id, {...req.body});
   if(!entry){
     return res.status(500).json({error: 'No such entry'});
