@@ -10,7 +10,7 @@ const NavBar = () => {
           <h1>Spending Tracker</h1>
         </Link>
         <div className="navbar-buttons">
-          <Link to="/addentry">
+          <Link to="/add-entry">
             <h2>Create</h2>
           </Link>
         </div>

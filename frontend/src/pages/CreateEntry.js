@@ -12,11 +12,7 @@ const CreateEntry = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(new Date(date));
-    console.log(store);
-    console.log(item);
-    console.log(cost);
-
+    
     const entry = {date, store, item, totalCost:cost};
     const response = await fetch('/api/entries',{
       method: 'POST',

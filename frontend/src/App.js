@@ -7,6 +7,7 @@ import Navbar from './components/Navbar'
 // pages
 import Home from './pages/Home'
 import CreateEntry from './pages/CreateEntry'
+import EditEntry from './pages/EditEntry'
 
 const App = () => {
 
@@ -21,8 +22,12 @@ const App = () => {
               element={<Home/>}
             />
             <Route
-              path="/addentry"
+              path="/add-entry"
               element={<CreateEntry/>}
+            />
+            <Route
+              path="/edit-entry"
+              element={<EditEntry/>}
             />
           </Routes>
         </div>

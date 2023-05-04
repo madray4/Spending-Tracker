@@ -1,4 +1,5 @@
 import { useEntriesContext } from '../hooks/useEntriesContext';
+import { Link } from 'react-router-dom';
 
 const EntryDetails = ({ entry }) => {
   const { dispatch } = useEntriesContext();
@@ -22,7 +23,10 @@ const EntryDetails = ({ entry }) => {
       <p>{entry.item}</p>
       <p>${entry.totalCost}</p>
       <div className="entry-details-buttons">
-        <span className="material-symbols-outlined">edit</span>
+        <Link to='/edit-entry'
+                state={({entry: entry})}>
+          <span className="material-symbols-outlined">edit</span>
+        </Link>
         <span className="material-symbols-outlined" onClick={deleteEntry}>delete</span>
       </div>
     </div>
