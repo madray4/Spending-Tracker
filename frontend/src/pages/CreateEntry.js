@@ -18,7 +18,7 @@ const CreateEntry = () => {
     console.log(cost);
 
     const entry = {date, store, item, totalCost:cost};
-    const response = await fetch('http://localhost:4000/api/entries',{
+    const response = await fetch('/api/entries',{
       method: 'POST',
       body: JSON.stringify(entry),
       headers: {

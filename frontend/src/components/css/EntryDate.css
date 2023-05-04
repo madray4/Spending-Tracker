@@ -36,3 +36,27 @@ h3{
   outline: 1px solid gray;
   border-radius: 10px;
 }
+
+.entry-details > * {
+  align-self: center;
+}
+
+
+.entry-details span{
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
+}
+
+.entry-details-buttons{
+  display: flex;
+  gap: 20px;
+  justify-content: right;
+  margin-right: 10px;
+}
+
+.entry-details-buttons > *:hover {
+  outline: 1px solid red;
+}
