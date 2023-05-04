@@ -1,22 +1,29 @@
-import { useState } from 'react';
-import { useNavigate, useLocation } from "react-router-dom"
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation, useParams  } from "react-router-dom"
 
 import './css/CreateEntry.css'
 
 const EditEntry = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { entry } = location.state;
+  const { id } = useParams();
+  const url = '/api/entries/' + id;
+  console.log(url);
 
-  const [date, setDate ] = useState(entry.date);
-  const [store, setStore ] = useState(entry.store);
-  const [item, setItem ] = useState(entry.item);
-  const [cost, setCost ] = useState(entry.totalCost);
+  // const { entry } = location.state;
+  // const [date, setDate ] = useState(entry.date);
+  // const [store, setStore ] = useState(entry.store);
+  // const [item, setItem ] = useState(entry.item);
+  // const [cost, setCost ] = useState(entry.totalCost);
+
+  const [date, setDate ] = useState('');
+  const [store, setStore ] = useState('');
+  const [item, setItem ] = useState('');
+  const [cost, setCost ] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const editedEntry = {date, store, item, totalCost: cost};
-    const url = '/api/entries/' + entry._id;
     const response = await fetch(url, {
       method: 'PATCH',
       body: JSON.stringify(editedEntry),
@@ -34,6 +41,24 @@ const EditEntry = () => {
       console.log(response.error);
     }
   }
+
+  useEffect(() => {
+    const fetchEntry = async () =>{
+      const response = await fetch(url);
+      const json = await response.json();
+      if(response.ok){
+        setDate(json.date);
+        setStore(json.store);
+        setItem(json.item);
+        setCost(json.totalCost);
+      }
+      else{
+        navigate('/');
+      }
+    }
+
+    fetchEntry();
+  },[]);
 
   return (
     <form onSubmit={handleSubmit}>

@@ -26,7 +26,7 @@ const App = () => {
               element={<CreateEntry/>}
             />
             <Route
-              path="/edit-entry"
+              path="/edit-entry/:id"
               element={<EditEntry/>}
             />
           </Routes>

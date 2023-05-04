@@ -23,8 +23,7 @@ const EntryDetails = ({ entry }) => {
       <p>{entry.item}</p>
       <p>${entry.totalCost}</p>
       <div className="entry-details-buttons">
-        <Link to='/edit-entry'
-                state={({entry: entry})}>
+        <Link to={'/edit-entry/' + entry._id}>
           <span className="material-symbols-outlined entry-details-button">edit</span>
         </Link>
         <span className="material-symbols-outlined entry-details-button" onClick={deleteEntry}>delete</span>
