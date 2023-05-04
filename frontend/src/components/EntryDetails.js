@@ -25,9 +25,9 @@ const EntryDetails = ({ entry }) => {
       <div className="entry-details-buttons">
         <Link to='/edit-entry'
                 state={({entry: entry})}>
-          <span className="material-symbols-outlined">edit</span>
+          <span className="material-symbols-outlined entry-details-button">edit</span>
         </Link>
-        <span className="material-symbols-outlined" onClick={deleteEntry}>delete</span>
+        <span className="material-symbols-outlined entry-details-button" onClick={deleteEntry}>delete</span>
       </div>
     </div>
   );

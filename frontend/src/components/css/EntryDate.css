@@ -42,7 +42,7 @@ h3{
 }
 
 
-.entry-details span{
+.entry-details-buttons > *{
   cursor: pointer;
   background: #f1f1f1;
   padding: 6px;
@@ -52,7 +52,7 @@ h3{
 
 .entry-details-buttons{
   display: flex;
-  gap: 20px;
+  gap: 10px;
   justify-content: right;
   margin-right: 10px;
 }
