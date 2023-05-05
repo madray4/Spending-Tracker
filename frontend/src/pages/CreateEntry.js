@@ -8,6 +8,8 @@ const CreateEntry = () => {
   const [store, setStore ] = useState('');
   const [item, setItem ] = useState('');
   const [cost, setCost ] = useState('');
+  const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFeilds] = useState([]);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -21,8 +23,11 @@ const CreateEntry = () => {
         'Content-Type': 'application/json'
       }
     })
-    // const json = await response.json();
-
+    const json = await response.json();
+    if(!response.ok){
+      setError(json.error);
+      setEmptyFeilds(json.emptyFields);
+    }
     if(response.ok){
       navigate('/');
     }
@@ -34,20 +39,25 @@ const CreateEntry = () => {
       <label>Date:</label>
       <input type="date" 
               onChange={(e) => setDate(e.target.value)}
-              value={date}/>
+              value={date}
+              className={emptyFields.includes('date') ? "error" : ""}/>
       <label>Store Name:</label>
       <input type="text" 
               onChange={(e) => setStore(e.target.value)}
-              value={store}/>
+              value={store}
+              className={emptyFields.includes('store') ? "error" : ""}/>
       <label>Item:</label>
       <input type="text" 
               onChange={(e) => setItem(e.target.value)}
-              value={item}/>
+              value={item}
+              className={emptyFields.includes('item') ? "error" : ""}/>
       <label>Total Cost:</label>
       <input type="number"
               onChange={(e) => setCost(e.target.value)}
-              value={cost}/>
+              value={cost}
+              className={emptyFields.includes('totalCost') ? "error" : ""}/>
       <button>Submit</button>
+      {error && <div className="error">{error}</div>}
     </form>
   )
 };

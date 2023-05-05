@@ -24,6 +24,15 @@ const getEntry = async (req, res) => {
 
 // CREATE an entry
 const createEntry = async (req, res) => {
+  const { store, item, totalCost, date } = req.body;
+  let emptyFields = [];
+
+  if(!store) emptyFields.push('store');
+  if(!item) emptyFields.push('item');
+  if(!totalCost) emptyFields.push('totalCost');
+  if(!date) emptyFields.push('date');
+  if(emptyFields.length > 0) return res.status(400).json({error: 'Please fill in all fields', emptyFields});
+
   try{
     const entry = await Entry.create({...req.body});
     res.status(200).json(entry);
