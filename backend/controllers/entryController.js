@@ -60,7 +60,15 @@ const deleteEntry = async (req, res) => {
 // UPDATE an entry
 const updateEntry = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
+  const { store, item, totalCost, date } = req.body;
+  let emptyFields = [];
+
+  console.log(store, item, totalCost, date)
+  if(!store) emptyFields.push('store');
+  if(!item) emptyFields.push('item');
+  if(!totalCost) emptyFields.push('totalCost');
+  if(!date) emptyFields.push('date');
+  if(emptyFields.length > 0) return res.status(400).json({error: 'Please fill in all fields', emptyFields});
 
   if(!mongoose.Types.ObjectId.isValid(id)){
     return res.status(500).json({error: 'No such entry'});

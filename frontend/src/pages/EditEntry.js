@@ -8,22 +8,18 @@ const EditEntry = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const url = '/api/entries/' + id;
-  console.log(url);
-
-  // const { entry } = location.state;
-  // const [date, setDate ] = useState(entry.date);
-  // const [store, setStore ] = useState(entry.store);
-  // const [item, setItem ] = useState(entry.item);
-  // const [cost, setCost ] = useState(entry.totalCost);
 
   const [date, setDate ] = useState('');
   const [store, setStore ] = useState('');
   const [item, setItem ] = useState('');
   const [cost, setCost ] = useState('');
+  const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFeilds] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const editedEntry = {date, store, item, totalCost: cost};
+    console.log(editedEntry);
     const response = await fetch(url, {
       method: 'PATCH',
       body: JSON.stringify(editedEntry),
@@ -32,13 +28,14 @@ const EditEntry = () => {
       }
     })
     const json = await response.json();
+    console.log(json);
 
-    if(response.ok){
-      console.log("Before navigate")
-      navigate('/');
+    if(!response.ok){
+      setError(json.error);
+      setEmptyFeilds(json.emptyFields);
     }
-    else{
-      console.log(response.error);
+    if(response.ok){
+      navigate('/');
     }
   }
 
@@ -66,20 +63,25 @@ const EditEntry = () => {
       <label>Date:</label>
       <input type="date" 
               onChange={(e) => setDate(e.target.value)}
-              value={date}/>
+              value={date}
+              className={emptyFields.includes('date') ? "error" : ""}/>
       <label>Store Name:</label>
       <input type="text" 
               onChange={(e) => setStore(e.target.value)}
-              value={store}/>
+              value={store}
+              className={emptyFields.includes('store') ? "error" : ""}/>
       <label>Item:</label>
       <input type="text" 
               onChange={(e) => setItem(e.target.value)}
-              value={item}/>
+              value={item}
+              className={emptyFields.includes('item') ? "error" : ""}/>
       <label>Total Cost:</label>
       <input type="number"
               onChange={(e) => setCost(e.target.value)}
-              value={cost}/>
+              value={cost}
+              className={emptyFields.includes('totalCost') ? "error" : ""}/>
       <button>Submit</button>
+      {error && <div className="error">{error}</div>}
     </form>
   );
 };
