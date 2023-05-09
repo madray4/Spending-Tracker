@@ -4,7 +4,7 @@ import { useSignup } from '../hooks/useSignUp';
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState(''); 
-  const { signup, isLoading, error} = useSignup();
+  const { signup, error, isLoading } = useSignup();
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ const Signup = () => {
         type="password" 
         onChange={ (e) => setPassword(e.target.value) }
         value={password}/>
-      <button>Sign Up</button>
+      <button disabled={isLoading}>Sign Up</button>
       {error && <div className="error">{error}</div>}
     </form>
   );
