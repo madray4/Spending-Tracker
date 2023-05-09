@@ -38,11 +38,11 @@ userSchema.statics.login = async function(email, password){
 
   // find if email exists as an account
   const user = await this.findOne({ email });
-  if(!user) throw Error('Invalid Credentials - E');
+  if(!user) throw Error('Invalid Credentials');
 
   // validate password
   const match = await bcrypt.compare(password, user.password);
-  if(!match) throw Error('Inavlid Credentials - P');
+  if(!match) throw Error('Inavlid Credentials');
   return user;
 }
 

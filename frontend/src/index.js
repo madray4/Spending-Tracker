@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { EntriesContextProvider } from './context/EntriesContext';
+import { AuthContextProvider } from './context/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <EntriesContextProvider>
-        <App />
-    </EntriesContextProvider>
+root.render(    
+    <AuthContextProvider>
+        <EntriesContextProvider>
+            <App />
+        </EntriesContextProvider>
+    </AuthContextProvider>
 );
