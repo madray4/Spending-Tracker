@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, useParams  } from "react-router-dom"
 
-import './css/CreateEntry.css'
-
 const EditEntry = () => {
   const location = useLocation();
   const navigate = useNavigate();

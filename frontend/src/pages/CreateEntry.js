@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom"
 
-import './css/CreateEntry.css'
-
 const CreateEntry = () => {
   const [date, setDate ] = useState('');
   const [store, setStore ] = useState('');

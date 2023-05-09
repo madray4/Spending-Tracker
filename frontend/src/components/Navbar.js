@@ -13,6 +13,12 @@ const NavBar = () => {
           <Link to="/add-entry">
             <h2>Create</h2>
           </Link>
+          <Link to="/login">
+            <h2>Log in</h2>
+          </Link>
+          <Link to="/signup">
+            <h2>Sign up</h2>
+          </Link>
         </div>
       </div>
     </header>

@@ -5,9 +5,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar'
 
 // pages
-import Home from './pages/Home'
-import CreateEntry from './pages/CreateEntry'
-import EditEntry from './pages/EditEntry'
+import Home from './pages/Home';
+import CreateEntry from './pages/CreateEntry';
+import EditEntry from './pages/EditEntry';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 const App = () => {
 
@@ -28,6 +30,14 @@ const App = () => {
             <Route
               path="/edit-entry/:id"
               element={<EditEntry/>}
+            />
+            <Route
+              path="/login"
+              element={<Login/>}
+            />
+            <Route
+              path="/Signup"
+              element={<Signup/>}
             />
           </Routes>
         </div>
