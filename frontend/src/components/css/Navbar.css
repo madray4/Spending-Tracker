@@ -16,12 +16,25 @@ header a {
   text-decoration: none;
 }
 
-.navbar-buttons{
+nav {
   display: flex;
-  gap: 20px;
-  justify-content: space-between;
+  align-items: center;
+}
+nav a {
+  margin-left: 10px;
 }
 
-.navbar-buttons a:hover{
-  color: gray;
+nav a:hover{
+  color: var(--primary);
+}
+
+nav button {
+  background: #fff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: "Montserrat";
+  cursor: pointer;
+  font-size: 1em;
 }

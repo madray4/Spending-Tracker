@@ -15,22 +15,18 @@ const NavBar = () => {
         <Link to="/">
           <h1>Spending Tracker</h1>
         </Link>
-        <div className="navbar-buttons">
-          <button onClick={handleLogout}>
-            Log out
-          </button>
-        </div>
-        <div className="navbar-buttons">
-          <Link to="/add-entry">
-            <h2>Create</h2>
-          </Link>
-          <Link to="/login">
-            <h2>Log in</h2>
-          </Link>
-          <Link to="/signup">
-            <h2>Sign up</h2>
-          </Link>
-        </div>
+        <nav>
+          <div>
+            <button onClick={handleLogout}>
+              Log out
+            </button>
+          </div>
+          <div>
+            <Link to="/add-entry">Create</Link>
+            <Link to="/login">Log in</Link>
+            <Link to="/signup">Sign up</Link>
+          </div>
+        </nav>
       </div>
     </header>
   )

@@ -12,11 +12,11 @@ export const useLogin = () => {
 
     const response = await fetch('/api/user/login', {
       method: 'POST',
-      header: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
     });
 
-    const json = response.json();
+    const json = await response.json();
 
     if (!response.ok) {
       setError(json.error);
