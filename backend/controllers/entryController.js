@@ -11,7 +11,6 @@ const getEntries = async (req, res) => {
 // GET a single entry
 const getEntry = async (req, res) => {
   const { id } = req.params;
-
   if(!mongoose.Types.ObjectId.isValid(id)){
     return res.status(500).json({error: 'No such entry'});
   }
@@ -19,6 +18,9 @@ const getEntry = async (req, res) => {
   const entry = await Entry.findById(id);
   if(!entry) {
     return res.status(500).json({error: 'No such entry'});
+  }
+  if (req.user._id.toString() != entry.user_id){
+    return res.status(500).json({ error: 'This entry does not belong to you' });
   }
   res.status(200).json(entry);
 }
