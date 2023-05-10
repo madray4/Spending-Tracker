@@ -18,6 +18,10 @@ const entrySchema = new Schema({
   date: {
     type: String,
     required: true
+  },
+  user_id: {
+    type: String,
+    required: true
   }
 });
 

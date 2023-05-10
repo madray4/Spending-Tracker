@@ -3,9 +3,10 @@ const mongoose = require ('mongoose');
 
 // GET all entries
 const getEntries = async (req, res) => {
-  const entries = await Entry.find({});
+  const user_id = req.user._id;
+  const entries = await Entry.find({ user_id });
   res.status(200).json(entries);
-} ;
+};
 
 // GET a single entry
 const getEntry = async (req, res) => {
@@ -25,6 +26,7 @@ const getEntry = async (req, res) => {
 // CREATE an entry
 const createEntry = async (req, res) => {
   const { store, item, totalCost, date } = req.body;
+  const user_id = req.user._id;
   let emptyFields = [];
 
   if(!store) emptyFields.push('store');
@@ -34,7 +36,7 @@ const createEntry = async (req, res) => {
   if(emptyFields.length > 0) return res.status(400).json({error: 'Please fill in all fields', emptyFields});
 
   try{
-    const entry = await Entry.create({...req.body});
+    const entry = await Entry.create({...req.body, user_id});
     res.status(200).json(entry);
   }
   catch (error){

@@ -21,6 +21,7 @@ const NavBar = () => {
         <nav>
           {user && (
             <div className='nav-routes'>
+              <span>{user.email}</span>
               <Link to="/add-entry"><button>Create</button></Link>
               <button onClick={handleLogout}>
                 Log out
