@@ -20,17 +20,17 @@ const NavBar = () => {
         </Link>
         <nav>
           {user && (
-            <div>
+            <div className='nav-routes'>
+              <Link to="/add-entry"><button>Create</button></Link>
               <button onClick={handleLogout}>
                 Log out
               </button>
             </div>
           )}
           {!user && (
-            <div>
-              <Link to="/add-entry">Create</Link>
-              <Link to="/login">Log in</Link>
-              <Link to="/signup">Sign up</Link>
+            <div className = 'nav-routes'>
+              <Link to="/login"><button>Log in</button></Link>
+              <Link to="/signup"><button>Sign Up</button></Link>
             </div>
           )}
         </nav>

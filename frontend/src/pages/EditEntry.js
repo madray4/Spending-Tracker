@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation, useParams  } from "react-router-dom"
+import { useNavigate, useParams  } from "react-router-dom"
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const EditEntry = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const url = '/api/entries/' + id;
-
   const [date, setDate ] = useState('');
   const [store, setStore ] = useState('');
   const [item, setItem ] = useState('');
@@ -14,15 +10,31 @@ const EditEntry = () => {
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFeilds] = useState([]);
 
+  // const location = useLocation();
+  const navigate = useNavigate();
+  const { user } = useAuthContext();
+  const { id } = useParams();
+  const url = '/api/entries/' + id;
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // User Validation: If no user, set error and return
+    if (!user) {
+      setError('You must be logged in');
+      return;
+    }
+
     const editedEntry = {date, store, item, totalCost: cost};
     console.log(editedEntry);
+
+    // Authorization Headers: use user.token in headers Authorization to make authorized request
     const response = await fetch(url, {
       method: 'PATCH',
       body: JSON.stringify(editedEntry),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
       }
     })
     const json = await response.json();
@@ -38,8 +50,16 @@ const EditEntry = () => {
   }
 
   useEffect(() => {
+    if (!user) {
+      setError('You must be logged in');
+      return;
+    }
     const fetchEntry = async () =>{
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
       const json = await response.json();
       if(response.ok){
         setDate(json.date);

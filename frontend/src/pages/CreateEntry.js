@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom"
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const CreateEntry = () => {
   const [date, setDate ] = useState('');
@@ -8,17 +9,26 @@ const CreateEntry = () => {
   const [cost, setCost ] = useState('');
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFeilds] = useState([]);
+
   const navigate = useNavigate();
+  const { user } = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    // User Validation: if no user set error field and return
+    if (!user) {
+      setError('You must be logged in');
+      return;
+    }
+
     const entry = {date, store, item, totalCost:cost};
     const response = await fetch('/api/entries',{
       method: 'POST',
       body: JSON.stringify(entry),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
       }
     })
     const json = await response.json();

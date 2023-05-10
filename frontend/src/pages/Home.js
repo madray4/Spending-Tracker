@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useEntriesContext } from '../hooks/useEntriesContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 import './css/Home.css'
 
@@ -8,10 +9,18 @@ import EntryDate from '../components/EntryDate'
 
 const Home = () => {
   const { entries, dispatch } = useEntriesContext();
+  const { user } = useAuthContext();
   
   useEffect(() => {
+    // if no user just return
+    if ( !user ) return;
     const fetchEntries = async () => {
-      const response = await fetch('/api/entries');
+      // use user.token in authorization headers to make authorized request
+      const response = await fetch('/api/entries', {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
       const json = await response.json();
 
       if(response.ok){
@@ -19,7 +28,7 @@ const Home = () => {
       }
     }
     fetchEntries();
-  }, [dispatch])
+  }, [dispatch, user]);
   
   const getUniqueDates = (entries) => {
     const uniqueDatesSet = new Set();

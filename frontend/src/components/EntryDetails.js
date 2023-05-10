@@ -1,12 +1,21 @@
 import { useEntriesContext } from '../hooks/useEntriesContext';
 import { Link } from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const EntryDetails = ({ entry }) => {
   const { dispatch } = useEntriesContext();
+  const { user } = useAuthContext();
 
   const deleteEntry = async () => {
+    // User Validation: return if no user
+    if (!user) return;
+
+    // Authorization Headers: use user.token in headers Authorization to make authorized request
     const response = await fetch('/api/entries/' + entry._id,{
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
     });
     const json = await response.json();
 
