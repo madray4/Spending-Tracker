@@ -6,8 +6,13 @@ const {
   deleteEntry,
   updateEntry
 } = require ('../controllers/entryController');
+const requireAuth = require('../middleware/requireAuth');
+
 
 const router = express.Router();
+
+// verify auth
+router.use(requireAuth);
 
 // GET all entries
 router.get('/', getEntries);
