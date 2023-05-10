@@ -52,7 +52,7 @@ const EditEntry = () => {
   useEffect(() => {
     if (!user) {
       setError('You must be logged in');
-      return;
+      navigate('/');
     }
     const fetchEntry = async () =>{
       const response = await fetch(url, {
@@ -73,7 +73,7 @@ const EditEntry = () => {
     }
 
     fetchEntry();
-  },[]);
+  },[navigate, url, user]);
 
   return (
     <form onSubmit={handleSubmit}>

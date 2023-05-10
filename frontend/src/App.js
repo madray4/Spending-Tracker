@@ -13,7 +13,10 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 
 const App = () => {
-  const { user } = useAuthContext();
+  const { user } =  useAuthContext();
+  console.log(user);
+
+  
 
   return (
     <div className="App">
@@ -38,7 +41,7 @@ const App = () => {
               element={!user ? <Login/> : <Navigate to="/"/>}
             />
             <Route
-              path="/Signup"
+              path="/signup"
               element={!user ? <Signup/> : <Navigate to="/"/>}
             />
           </Routes>
